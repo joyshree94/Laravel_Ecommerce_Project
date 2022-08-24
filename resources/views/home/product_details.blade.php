@@ -42,20 +42,30 @@
               <h6 style="color:red">
                 Discount Price
               </br>
-                {{$product_item->discount}}
+                ${{$product_item->discount}}
               </h6>
               <h6 style="text-decoration:line-through;color:blue">
-                 {{ $product_item->price }}
+                ${{ $product_item->price }}
               </h6>
               @else
               <h6 style="color:blue">
-                {{ $product_item->price }}
+                ${{ $product_item->price }}
              </h6>
               @endif
               <h6>Product Category: {{ $product_item->category }}</h6>
               <h6>Product Details: {{ $product_item->description }}</h6>
               <h6>Available Quantity: {{ $product_item->quantity }}</h6>
-              <a href="" class="btn btn-primary">Add To Cart</a>
+              <form action="{{ url('add_cart',$product_item->id) }}" method="POST">
+               @csrf 
+               <div class="row">
+                  <div class="col-md-4">
+                      <input type="number" name="quantity" value="1" min="1" style="width: 100px;">
+                  </div>
+                  <div class="col-md-4">
+                      <input type="submit" value="Add To Cart">
+                   </div>
+                  </div>
+             </form>
            </div>
         </div>
      </div>

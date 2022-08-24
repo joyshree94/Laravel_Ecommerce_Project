@@ -38,14 +38,14 @@
                    <h6 style="color:red">
                      Discount Price
                    </br>
-                     {{$product->discount}}
+                     ${{$product->discount}}
                    </h6>
                    <h6 style="text-decoration:line-through;color:blue">
-                      {{ $product->price }}
+                      ${{ $product->price }}
                    </h6>
                    @else
                    <h6 style="color:blue">
-                     {{ $product->price }}
+                     ${{ $product->price }}
                   </h6>
                    @endif
                 </div>
