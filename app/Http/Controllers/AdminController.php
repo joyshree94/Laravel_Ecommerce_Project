@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Category;
+use App\Models\Product;
 class AdminController extends Controller
 {
     public function view_category()
@@ -24,5 +25,70 @@ class AdminController extends Controller
         $data->delete();
         return redirect()->back()->with('message','category delete successfully');
     }
+    public function view_product()
+    {
+        $cat=Category::all();
+        return view('admin.products',compact('cat'));
+    }
+    public function add_product(Request $request)
+    { 	
+        $data=new Product;
+        $data->title=$request->title;
+        $data->description=$request->description;
 
+        $image=$request->image;
+        $imagename=time().'.'.$image->getClientOriginalExtension();
+        $request->image->move('product',$imagename);
+        $data->image=$imagename;
+
+        $data->price=$request->price;
+        $data->quantity=$request->quantity;
+        $data->category=$request->category;
+        $data->discount=$request->discount;
+        $data->save();
+        return redirect()->back()->with('message','product delete successfully');
+    }
+   // {{ $data->links() }} paginate(2);//
+    public function show_product()
+    {
+        $data=Product::all();
+      //  return view('admin.show_product',compact('data'));
+      return view('admin.show_product',[
+        'data' => $data 
+        ]);
+        return redirect()->back()->with('message','product delete successfully');
+    }
+
+    public function delete_product($id)
+    {
+        $data=Product::find($id);
+        $data->delete();
+        return redirect()->back()->with('message','product delete successfully');
+    }
+
+    public function update_product($id)
+    {
+        $data=Product::find($id);
+        $cat=Category::all();
+        return view('admin.update_product',compact('data','cat'));
+    }
+    public function update_product_confirm(Request $request, $id)
+    {
+        $data=Product::find($id);
+        $data->title=$request->title;
+        $data->description=$request->description;
+        $image=$request->image;
+        if($image)
+        {
+            $imagename=time().'.'.$image->getClientOriginalExtension();
+            $request->image->move('product',$imagename);
+            $data->image=$imagename;
+        }
+        $data->price=$request->price;
+        $data->quantity=$request->quantity;
+        $data->category=$request->category;
+        $data->discount=$request->discount;
+        $data->update();
+        return  redirect()->back()->with('message','product update successfully');
+    }
 }
