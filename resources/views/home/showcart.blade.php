@@ -24,7 +24,7 @@
         .center
         {
             margin:auto;
-            width: 50%;
+            width: 70%;
             text-align: center;
             padding: 30px;
         }
@@ -38,6 +38,16 @@
             padding: 5px;
             background: skyblue;
             color:white;
+        }
+        .img_deg
+        {
+            height: 200px;
+            width: 200px;
+        }
+        .total_deg
+        {
+            font-size: 20px;
+            padding: 40px;
         }
       </style>
    </head>
@@ -58,20 +68,29 @@
                 <th class="th_deg">Image</th>
                 <th class="th_deg">Action</th>
             </tr>
+            <?php $totalprice=0; ?>
+            @foreach ($cart as $item)
             <tr>
-                <td>shirt</td>
-                <td>shirt</td>
-                <td>shirt</td>
-                <td>shirt</td>
-                <td>shirt</td>
+                <td>{{ $item->product_title }}</td>
+                <td>{{ $item->quantity }}</td>
+                <td>${{ $item->price }}</td>
+                <td>
+                    <img class="img_deg" src="/product/{{ $item->image }}" alt="">
+                </td>
+                <td>
+                    <a class="btn btn-danger" onclick="return confirm('Are you sure remove this product')" href="{{ url('remove_cart',$item->id) }}">Remove Product</a>
+                </td>
             </tr>
+            <?php $totalprice=$totalprice + $item->price; ?>
+            @endforeach
+           
         </table>
-
+            <div>
+                <h1 class="total_deg">Total Price: ${{ $totalprice }}</h1>
+            </div>
      
     </div>
-      <!-- footer start -->
-      @include('home.footer')
-      <!-- footer end -->
+      
       <div class="cpy_">
          <p class="mx-auto">© 2021 All Rights Reserved By <a href="https://html.design/">Free Html Templates</a><br>
          
