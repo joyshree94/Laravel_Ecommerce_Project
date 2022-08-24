@@ -48,14 +48,14 @@ class AdminController extends Controller
         $data->save();
         return redirect()->back()->with('message','product delete successfully');
     }
-   // {{ $data->links() }} paginate(2);//
+
     public function show_product()
     {
-        $data=Product::all();
-      //  return view('admin.show_product',compact('data'));
-      return view('admin.show_product',[
-        'data' => $data 
-        ]);
+        $datas=Product::paginate(10);
+        return view('admin.show_product',compact('datas'));
+    //  return view('admin.show_product',[
+      //  'datas' => $datas 
+      //  ]);
         return redirect()->back()->with('message','product delete successfully');
     }
 

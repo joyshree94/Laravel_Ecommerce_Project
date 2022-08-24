@@ -60,7 +60,7 @@
                        
                         
                     </tr>
-                    @foreach ($data as $data)
+                    @foreach ($datas as $data)
                     <tr>
                         <td>{{ $data->title }}</td>
                         <td>{{ $data->description }}</td>
@@ -81,6 +81,7 @@
                        
                     </tr>
                     @endforeach
+                    {{ $datas->links() }}
                 </table>
             </div>
         </div>
