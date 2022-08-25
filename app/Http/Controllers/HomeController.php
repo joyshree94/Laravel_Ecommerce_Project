@@ -8,6 +8,7 @@ use App\models\User;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\Cart;
+use App\Models\Order;
 class HomeController extends Controller
 {
     public function index()
@@ -88,6 +89,47 @@ class HomeController extends Controller
         $car_item=Cart::find($id);
         $car_item->delete();
         return redirect()->back();
+    }
+
+    public function cash_order()
+    { 	
+
+        $user=Auth::user()->id;
+        $cart=Cart::where('user_id','=',$user)->get();
+        foreach( $cart as $data)
+        {
+            $order=new Order;
+            $order->name = $data->name;
+
+            $order->email=$data->email;
+
+            $order->phone=$data->phone; 	 	 	 	 	
+
+            $order->address=$data->address;
+
+            $order->user_id=$data->user_id;
+
+            $order->product_title=$data->product_title;
+
+            $order->quantity=$data->quantity;
+
+            $order->price=$data->price;
+
+            $order->image=$data->image;
+
+            $order->product_id=$data->product_id;
+
+            $order->payment_status= 'cash on delivery';
+
+            $order->delivery_status= 'processing';
+            $order->save();
+            $cart_id=$data->id;
+            $cart_item=Cart::find($cart_id);
+            $cart_item->delete();
+       
+        }
+
+        return redirect()->back()->with('message','we have recieved order your order successfully.we will connect with you soon');
     }
 
 }
