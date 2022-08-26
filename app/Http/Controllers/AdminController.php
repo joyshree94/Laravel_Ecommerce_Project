@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\Order;
 class AdminController extends Controller
 {
     public function view_category()
@@ -90,5 +91,19 @@ class AdminController extends Controller
         $data->discount=$request->discount;
         $data->update();
         return  redirect()->back()->with('message','product update successfully');
+    }
+
+    public function order()
+    {
+        $orders=Order::all();
+        return view('admin.orderpage',compact('orders'));
+    }
+    public function delivery($id)
+    {
+        $order=Order::find($id);
+        $order->delivery_status="delivered";
+        $order->payment_status="paid";
+        $order->save();
+        return redirect()->back();
     }
 }
