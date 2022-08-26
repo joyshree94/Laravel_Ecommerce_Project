@@ -41,17 +41,20 @@
                     <h1 class="title_deg">All Orders</h1>
                     <table class="table_deg">
                         <tr class="th_deg"> 	
-                            <th style="padding: 10px;">Name</th>
-                            <th style="padding: 10px;">Email</th>
-                            <th style="padding: 10px;">Address</th>
-                            <th style="padding: 10px;">Phone</th>
-                            <th style="padding: 10px;">Product Title</th>
-                            <th style="padding: 10px;">Quantity</th>
-                            <th style="padding: 10px;">Price</th>
-                            <th style="padding: 10px;">Payment Status</th>
-                            <th style="padding: 10px;">Delivery Status</th>
-                            <th style="padding: 10px;">Image </th>
-                            <th style="padding: 10px;">Delivered </th>
+                            <th style="padding: 5px;">Name</th>
+                            <th style="padding: 5px;">Email</th>
+                            <th style="padding: 5px;">Address</th>
+                            <th style="padding: 5px;">Phone</th>
+                            <th style="padding: 5px;">Product Title</th>
+                            <th style="padding: 5px;">Quantity</th>
+                            <th style="padding: 5px;">Price</th>
+                            <th style="padding: 5px;">Payment Status</th>
+                            <th style="padding: 5px;">Delivery Status</th>
+                            <th style="padding: 5px;">Image </th>
+                            <th style="padding: 5px;">Delivered </th>
+                            <th style="padding: 5px;">Print PDF </th>
+                            <th style="padding: 5px;"> Send Email </th>
+                            
                         
                         </tr>
                         @foreach ($orders as $order)
@@ -75,6 +78,12 @@
                                 @else
                                 <p style="color:green;">delivered</p>
                                 @endif
+                            </td>
+                            <td>
+                                <a href="{{ url('print_pdf',$order->id) }}" class="btn btn-secondary">Print PDF</a>
+                            </td>
+                            <td>
+                                <a href="{{ url('send_email',$order->id) }}" class="btn btn-info">Send email</a>
                             </td>
                         </tr>
                         @endforeach
