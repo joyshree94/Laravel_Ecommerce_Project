@@ -265,5 +265,17 @@ class HomeController extends Controller
             return redirect('login');
         }
     }
+
+    public function product_search(Request $request)
+    {
+
+        $searchtext=$request->search;
+        $data=Product::where('title','LIKE',"%$searchtext%")
+              ->orWhere('category','LIKE',"%$searchtext%")
+              ->paginate(10);
+        $comment=Comment::orderby('id','desc')->get();
+        $reply=Reply::all();
+        return view('home.userpage',compact('data','comment','reply'));
+    }
 }
    
