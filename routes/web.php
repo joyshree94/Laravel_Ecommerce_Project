@@ -40,7 +40,7 @@ Route::get('/delivery/{id}',[AdminController::class,'delivery']);
 Route::get('/print_pdf/{id}',[AdminController::class,'print_pdf']);
 Route::get('/send_email/{id}',[AdminController::class,'send_email']);
 Route::post('/send_user_email/{id}',[AdminController::class,'send_user_email']);
-
+Route::get('/search',[AdminController::class,'search']);
 
 Route::get('/product_details/{id}',[HomeController::class,'product_details']);
 Route::post('/add_cart/{id}',[HomeController::class,'add_cart']);
