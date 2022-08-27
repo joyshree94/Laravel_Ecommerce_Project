@@ -9,6 +9,8 @@ use App\Models\Category;
 use App\Models\Product;
 use App\Models\Cart;
 use App\Models\Order;
+use App\Models\Comment;
+use App\Models\Reply;
 
 use Session;
 use Stripe;
@@ -17,7 +19,9 @@ class HomeController extends Controller
     public function index()
     {
         $data=Product::paginate(9);
-        return view('home.userpage',compact('data'));
+        $comment=Comment::orderby('id','desc')->get();
+        $reply=Reply::all();
+        return view('home.userpage',compact('data','comment','reply'));
     }
     public function redirect()
     {
@@ -42,7 +46,9 @@ class HomeController extends Controller
         else
         {
             $data=Product::paginate(9);
-        return view('home.userpage',compact('data'));
+            $comment=Comment::orderby('id','desc')->get();
+            $reply=Reply::all();
+        return view('home.userpage',compact('data','comment','reply'));
         }
     }
     public function product_details($id)
@@ -222,6 +228,42 @@ class HomeController extends Controller
         $order->delivery_status="you cancel you order";
         $order->save();
         return redirect()->back();
+    }
+    public function  add_comment(Request $request)
+    {
+        if(Auth::id())
+        {
+            $comment= new Comment;
+            $comment->name=Auth::user()->name;
+            $comment->comment=$request->comment;
+            $comment->user_id=Auth::user()->id;
+            $comment->save();
+            return redirect()->back();
+        }
+        else
+        {
+            return redirect('login');
+        }
+    }
+
+    public function add_reply(Request $request)
+    {
+        if(Auth::id())
+        {
+            $reply=new Reply;
+            $reply->name=Auth::user()->name;
+            $reply->comment_id=$request->commentid;
+            $reply->reply=$request->reply;
+            $reply->user_id=Auth::user()->id;
+
+            $reply->save();
+            return redirect()->back();
+        }
+
+        else
+        {
+            return redirect('login');
+        }
     }
 }
    
