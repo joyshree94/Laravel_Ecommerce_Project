@@ -2,7 +2,6 @@
 <html>
    <head>
       <!-- Basic -->
-      <base href="/public">
       <meta charset="utf-8" />
       <meta http-equiv="X-UA-Compatible" content="IE=edge" />
       <!-- Mobile Metas -->
@@ -25,55 +24,50 @@
       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
       
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
    </head>
    <body>
       <div class="hero_area">
          <!-- header section strats -->
          @include('home.header')
-        
          <!-- end header section -->
-     
-      <div class="col-sm-6 col-md-4 col-lg-4" style="margin:auto; width:70%;
-      padding:30px;">
-           <div class="img-box" style="padding:20px;">
-              <img src="product/{{ $product_item->image }}" alt="">
-           </div>
-           <div class="detail-box">
-              <h5>
-                {{$product_item->title}}
-              </h5>
-              @if ($product_item->discount!=null)
-              <h6 style="color:red">
-                Discount Price
-              </br>
-                ${{$product_item->discount}}
-              </h6>
-              <h6 style="text-decoration:line-through;color:blue">
-                ${{ $product_item->price }}
-              </h6>
-              @else
-              <h6 style="color:blue">
-                ${{ $product_item->price }}
-             </h6>
-              @endif
-              <h6>Product Category: {{ $product_item->category }}</h6>
-              <h6>Product Details: {{ $product_item->description }}</h6>
-              <h6>Available Quantity: {{ $product_item->quantity }}</h6>
-              <form action="{{ url('add_cart',$product_item->id) }}" method="POST">
-               @csrf 
+         <section class="inner_page_head">
+            <div class="container_fuild">
                <div class="row">
-                  <div class="col-md-4">
-                      <input type="number" name="quantity" value="1" min="1" style="width: 100px;">
+                  <div class="col-md-12">
+                     <div class="full">
+                        <h3>Contact us</h3>
+                     </div>
                   </div>
-                  <div class="col-md-4">
-                      <input type="submit" value="Add To Cart">
-                   </div>
+               </div>
+            </div>
+         </section>
+         <section class="why_section layout_padding">
+            <div class="container">
+            
+               <div class="row">
+                  <div class="col-lg-8 offset-lg-2">
+                     <div class="full">
+                        <form action="index.html">
+                           <fieldset>
+                              <input type="text" placeholder="Enter your full name" name="name" required />
+                              <input type="email" placeholder="Enter your email address" name="email" required />
+                              <input type="text" placeholder="Enter subject" name="subject" required />
+                              <textarea placeholder="Enter your message" required></textarea>
+                              <input type="submit" value="Submit" />
+                           </fieldset>
+                        </form>
+                     </div>
                   </div>
-             </form>
-           </div>
-        </div>
-     </div>
-    </div>
+               </div>
+            </div>
+         </section>
+    
+
+
+
+   
+      <!-- end client section -->
       <!-- footer start -->
       @include('home.footer')
       <!-- footer end -->
@@ -84,10 +78,21 @@
          
          </p>
       </div>
+      <script type='text/javascript'>
+         document.addEventListener("DOMContentLoaded", function(event) { 
+             var scrollpos = localStorage.getItem('scrollpos');
+             if (scrollpos) window.scrollTo(0, scrollpos);
+         });
+ 
+         window.onbeforeunload = function(e) {
+             localStorage.setItem('scrollpos', window.scrollY);
+         };
+     </script>
+     
       <!-- jQery -->
       <script src="home/js/jquery-3.4.1.min.js"></script>
       <!-- popper js -->
-      <script src="jhome/s/popper.min.js"></script>
+      <script src="home/s/popper.min.js"></script>
       <!-- bootstrap js -->
       <script src="home/js/bootstrap.js"></script>
       <!-- custom js -->

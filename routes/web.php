@@ -53,3 +53,8 @@ Route::get('/cancel_order/{id}',[HomeController::class,'cancel_order']);
 Route::post('/add_comment',[HomeController::class,'add_comment']);
 Route::post('/add_reply',[HomeController::class,'add_reply']);
 Route::get('/product_search',[HomeController::class,'product_search']);
+Route::get('/product_page',[HomeController::class,'product_page']);
+Route::get('/blogpage',[HomeController::class,'blogpage']);
+Route::get('/contactpage',[HomeController::class,'contactpage']);
+Route::get('/testimonial',[HomeController::class,'testimonial']);
+Route::get('/aboutpage',[HomeController::class,'aboutpage']);

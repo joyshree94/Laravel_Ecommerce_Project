@@ -5,12 +5,12 @@
              Our <span>products</span>
           </h2>
           <div>
-            <form action="{{ url('product_search') }}" method="GET">
+           <!---- <form action="{{ url('product_search') }}" method="GET">
                @csrf
                <input style="width:500px;" type="text" name="search" placeholder="search for something">
                <input type="submit" value="search">
 
-            </form>
+            </form>---->
           </div>
        </div>
        <div class="row">
@@ -22,6 +22,8 @@
                       <a href="{{ url('product_details',$product->id) }}" class="option1">
                        Product Details
                       </a>
+                      @if (Route::has('login'))
+                      @auth
                       <form action="{{ url('add_cart',$product->id) }}" method="POST">
                         @csrf 
                         <div class="row">
@@ -33,6 +35,9 @@
                             </div>
                            </div>
                       </form>
+                      @endauth
+                      @endif
+
                    </div>
                 </div>
                 <div class="img-box">

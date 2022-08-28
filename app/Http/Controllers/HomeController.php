@@ -275,7 +275,32 @@ class HomeController extends Controller
               ->paginate(10);
         $comment=Comment::orderby('id','desc')->get();
         $reply=Reply::all();
-        return view('home.userpage',compact('data','comment','reply'));
+    //    return view('home.userpage',compact('data','comment','reply'));
+        return view('home.productpage',compact('data','comment','reply'));
+    }
+    public function product_page()
+    {   $comment=Comment::orderby('id','desc')->get();
+        $reply=Reply::all();
+        $data=Product::paginate(10);
+        return view('home.productpage',compact('data','comment','reply'));
+    }
+    public function blogpage()
+    {
+        return view('home.blogpage');
+    }
+
+    public function contactpage()
+    {
+        return view('home.contactpage');
+    }
+    public function testimonial()
+    {
+        return view('home.testimonialpage');
+    }
+
+    public function aboutpage()
+    {
+        return view('home.aboutpage');
     }
 }
    

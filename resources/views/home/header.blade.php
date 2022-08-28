@@ -7,39 +7,42 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
              <ul class="navbar-nav">
-                <li class="nav-item active">
-                   <a class="nav-link" href="{{ url('/') }}">Home <span class="sr-only">(current)</span></a>
-                </li>
-               <li class="nav-item dropdown">
-                   <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true"> <span class="nav-label">Pages <span class="caret"></span></a>
-                   <ul class="dropdown-menu">
-                      <li><a href="about.html">About</a></li>
-                      <li><a href="testimonial.html">Testimonial</a></li>
-                   </ul>
-                </li>
                 <li class="nav-item">
-                   <a class="nav-link" href="product.html">Products</a>
+                   <a class="nav-link {{ Request::is('/') ? 'active' :'' }}" href="{{ url('/') }}">Home <span class="sr-only">(current)</span></a>
                 </li>
+               
                 <li class="nav-item">
-                   <a class="nav-link" href="blog_list.html">Blog</a>
-                </li>
-                <li class="nav-item">
-                   <a class="nav-link" href="contact.html">Contact</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="{{ url('show_cart') }}">Cart</a>
+                  <a class="nav-link {{ Request::is('aboutpage') ? 'active' :'' }}" href="{{ url('aboutpage') }}">About</a>
                </li>
                <li class="nav-item">
-                  <a class="nav-link" href="{{ url('show_order') }}">Order</a>
+                  <a class="nav-link {{ Request::is('testimonial') ? 'active' :'' }}" href="{{ url('testimonial') }}">Testimonial</a>
                </li>
+                <li class="nav-item">
+                   <a class="nav-link {{ Request::is('product_page') ? 'active' :'' }}" href="{{ url('product_page') }}">Products</a>
+                </li>
+                <li class="nav-item">
+                   <a class="nav-link {{ Request::is('blogpage') ? 'active' :'' }}" href="{{ url('blogpage')}}">Blog</a>
+                </li>
+                <li class="nav-item">
+                   <a class="nav-link {{ Request::is('contactpage') ? 'active' :'' }}" href="{{ url('contactpage') }}">Contact</a>
+                </li>
+                @if (Route::has('login'))
+                @auth
+                <li class="nav-item">
+                  <a class="nav-link {{ Request::is('show_cart') ? 'active' :'' }}" href="{{ url('show_cart') }}" data-bs-toggle="tooltip" data-bs-title="Cart"><i class="fa-solid fa-cart-shopping"></i></a>
+               </li>
+               <li class="nav-item">
+                  <a data-bs-toggle="tooltip" data-bs-title="Order List" class="nav-link {{ Request::is('show_order') ? 'active' :'' }}" href="{{ url('show_order') }}"><i class="fa-solid fa-list-ul"></i></a>
+                  
+               </li>
+               
                 <form class="form-inline">
                   <button class="btn  my-2 my-sm-0 nav_search-btn" type="submit">
                   <i class="fa fa-search" aria-hidden="true"></i>
                   </button>
                  
                </form>
-               @if (Route::has('login'))
-               @auth
+              
                <li class="nav-item">
                   <x-app-layout>
  
@@ -47,10 +50,10 @@
                </li>
                @else
                 <li class="nav-item">
-                  <a class="btn btn-primary" id="logincss" href="{{ route('login') }}">login</a>
+                  <a data-bs-toggle="tooltip" data-bs-title="login" class="btn btn-primary" id="logincss" href="{{ route('login') }}"><i class="fa-solid fa-right-to-bracket"></i></a>
                </li>
                <li class="nav-item">
-                  <a class="btn btn-success" href="{{ route('register') }}">register</a>
+                  <a data-bs-toggle="tooltip" data-bs-title="register" class="btn btn-success" href="{{ route('register') }}"><i class="fa-solid fa-person-breastfeeding"></i></a>
                </li>
                @endauth
                 @endif
